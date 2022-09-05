@@ -1,7 +1,7 @@
 resource "azurerm_linux_virtual_machine" "myubuntu" {
   # count=2
   # name                  = "myubuntu20.04-${count.index}"
-  name                  = "${var.vm_name}"
+  name                  = var.vm_name
   resource_group_name   = azurerm_resource_group.newrg.name
   location              = azurerm_resource_group.newrg.location
   size                  = "Standard_DS1_v2"
@@ -24,10 +24,10 @@ resource "azurerm_linux_virtual_machine" "myubuntu" {
     version   = "latest"
   }
   connection {
-    type     = "ssh"
-    user     = self.admin_username
+    type        = "ssh"
+    user        = self.admin_username
     private_key = file("${path.module}/ssh-vm.pub")
-    host     = self.public_ip_address
+    host        = self.public_ip_address
   }
   provisioner "remote-exec" {
     inline = [
@@ -39,7 +39,9 @@ resource "azurerm_linux_virtual_machine" "myubuntu" {
     ]
     on_failure = continue
   }
-  #  source_image_reference {
+  tags = {
+    environment = "staging"
+  } #  source_image_reference {
   #   publisher = "MicrosoftWindowsServer"
   #   offer     = "WindowsServer"
   #   sku       = "2019-Datacenter"
