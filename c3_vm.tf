@@ -39,6 +39,9 @@ resource "azurerm_linux_virtual_machine" "myubuntu" {
     ]
     on_failure = continue
   }
+  tags = {
+    "name" = "created by Harshit"
+  }
   #  source_image_reference {
   #   publisher = "MicrosoftWindowsServer"
   #   offer     = "WindowsServer"
