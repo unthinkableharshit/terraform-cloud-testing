@@ -41,7 +41,7 @@ resource "azurerm_linux_virtual_machine" "myubuntu" {
   }
   tags = {
     environment = "staging"
-    Name = "created by Harshit"
+    Name = "created by Harshit Jain"
   } #  source_image_reference {
   #   publisher = "MicrosoftWindowsServer"
   #   offer     = "WindowsServer"
